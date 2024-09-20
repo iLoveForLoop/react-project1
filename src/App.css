@@ -1,0 +1,19 @@
+#root {
+  font-family: "Roboto", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0 50px 0;
+}
+
+.sub-container,
+.item-container {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
