@@ -12,7 +12,8 @@ function App() {
   const [txtName, setTxtName] = useState("");
   const [textPrice, setTextPrice] = useState("");
   const [textQuantity, setTextQuantity] = useState("");
-  const [editingIndex, setEditingIndex] = useState(null)
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [total, setTotal] = (useState(0));
 
   function onChange(e) {
     const id = e.target.id;
@@ -42,6 +43,8 @@ function App() {
         setCartItems(newItems);
       }
       
+      const total = item.price * item.quantity;
+      setTotal((data) => data += total )
       setTxtName("");
       setTextPrice("");
       setTextQuantity("");
@@ -50,8 +53,11 @@ function App() {
 
   function deleteItem(itemIndex) {
     console.log(itemIndex);
+    const total = cartItems[itemIndex].price * cartItems[itemIndex].quantity;
+    setTotal((data) => data -= total );
     const updatedItems = [...cartItems];
     updatedItems.splice(itemIndex, 1);
+
 
     setCartItems(updatedItems);
     
@@ -155,6 +161,10 @@ function App() {
                   );
                 })}
               </tbody>
+              <tfoot>
+                <th>Total</th>
+                <td>${total}</td>
+              </tfoot>
             </Table>
           </div>
         )}
