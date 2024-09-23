@@ -6,6 +6,7 @@ import Dropdown from "./components/dropdown/dropdown";
 import CustomButton from "./components/button/button";
 
 import "./App.css";
+import Checkout from "./components/checkout/Checkout";
 
 function App() {
 	const [cartItems, setCartItems] = useState([]);
@@ -194,16 +195,30 @@ function App() {
 								/>
 							</div>
 						</div>
-						<div className="ms-2">
-							<p className="mb-0 fs-6">SubTotal: {formatCurrency(subTotal)}</p>
-							<p className="mb-0 fs-6">
-								Shipping Fee: {formatCurrency(shippingFee)}
-							</p>
-							<h5>GrandTotal: {formatCurrency(subTotal + shippingFee)}</h5>
+						<div className="d-flex justify-content-between">
+							<div className="ms-2">
+								<p className="mb-0 fs-6">
+									SubTotal: {formatCurrency(subTotal)}
+								</p>
+								<p className="mb-0 fs-6">
+									Shipping Fee: {formatCurrency(shippingFee)}
+								</p>
+								<h5>GrandTotal: {formatCurrency(subTotal + shippingFee)}</h5>
+							</div>
+
+							<div className="d-flex justify-content-center align-items-center">
+								<CustomButton
+									label="Check Out"
+									variant="warning"
+									innerClass="my-1 me-2"
+									onClick={clearCart}
+								/>
+							</div>
 						</div>
 					</div>
 				)}
 			</div>
+			<Checkout />
 		</div>
 	);
 }
