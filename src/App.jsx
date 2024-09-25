@@ -87,6 +87,21 @@ function App() {
 		setCartItems([]);
 	}
 
+	const [isCheckout, setIsCheckOut] = useState(false);
+	function checkout() {
+		setIsCheckOut(!isCheckout);
+	}
+
+	const toogleCheckout = (data) => {
+		console.log("i reached here");
+		setIsCheckOut(data);
+		setCartItems([]);
+	};
+
+	const toogleCancel = (data) => {
+		console.log("cancelled");
+		setIsCheckOut(data);
+	};
 	return (
 		<div>
 			<div className="main-container">
@@ -211,14 +226,22 @@ function App() {
 									label="Check Out"
 									variant="warning"
 									innerClass="my-1 me-2"
-									onClick={clearCart}
+									onClick={checkout}
 								/>
 							</div>
 						</div>
 					</div>
 				)}
 			</div>
-			<Checkout />
+			{isCheckout && (
+				<Checkout
+					cart={cartItems}
+					toogleCheckout={toogleCheckout}
+					cancelCheckout={toogleCancel}
+					subTotal={subTotal}
+					shippingFee={shippingFee}
+				/>
+			)}
 		</div>
 	);
 }
