@@ -94,6 +94,7 @@ function App() {
 
 	const toogleCheckout = (data) => {
 		console.log("i reached here");
+		alert("Checkout successfull!");
 		setIsCheckOut(data);
 		setCartItems([]);
 	};
