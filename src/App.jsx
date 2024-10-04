@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 import Textbox from "./components/textbox/textbox";
@@ -9,13 +9,25 @@ import "./App.css";
 import Checkout from "./components/checkout/Checkout";
 
 function App() {
-	const [cartItems, setCartItems] = useState([]);
+	const [cartItems, setCartItems] = useState(() => {
+		const newItems = JSON.parse(localStorage.getItem("itemStorage"));
+		return newItems ? newItems : [];
+	});
 	const [txtName, setTxtName] = useState("");
 	const [textPrice, setTextPrice] = useState("");
 	const [textQuantity, setTextQuantity] = useState("");
 	const [editingIndex, setEditingIndex] = useState(null);
 	const [shippingFee, setShippingFee] = useState(0);
 	let subTotal = 0;
+
+	const setLocalStorage = (cartItems) => {
+		localStorage.setItem("itemStorage", JSON.stringify(cartItems));
+	};
+
+	useEffect(() => {
+		setLocalStorage(cartItems);
+		console.log("Something Changed");
+	}, [cartItems]);
 
 	const towns = ["tubigon", "calape", "loon"];
 	const fee = {
@@ -60,8 +72,9 @@ function App() {
 				setCartItems(updatedItems);
 				setEditingIndex(null);
 			} else {
-				const newItems = [...cartItems, item];
-				setCartItems(newItems);
+				// const newItems = [...cartItems, item];
+				// setCartItems(newItems);
+				setCartItems([...cartItems, item]);
 			}
 
 			setTxtName("");
@@ -103,6 +116,7 @@ function App() {
 		console.log("cancelled");
 		setIsCheckOut(data);
 	};
+
 	return (
 		<div>
 			<div className="main-container">
